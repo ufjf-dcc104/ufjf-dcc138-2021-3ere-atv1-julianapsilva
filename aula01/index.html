@@ -18,10 +18,13 @@
         canvas.width = 480
         canvas.height = 320
         let x = 150
+        let t0, dt
         let ctx = canvas.getContext('2d')
-        desenha()
+        requestAnimationFrame(desenha)
 
-        function desenha() {
+        function desenha(t) {
+            t0 = t0 ?? t
+            dt = (t - t0) / 1000
             //desenha fundo
             ctx.fillStyle = 'black'
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -29,6 +32,8 @@
             //desenha elementos
             ctx.fillStyle = 'white'
             ctx.fillRect(x, 150, 20, 20)
+            requestAnimationFrame(desenha)
+            t0 = t
         }
 
 
