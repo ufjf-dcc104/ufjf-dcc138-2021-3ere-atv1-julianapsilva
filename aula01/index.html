@@ -32,9 +32,9 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
             //atualiza estados
-            x = x + 10 * dt
             a = a + 2 * Math.PI * dt
-            y = 100 + 1500 * Math.cos(a)
+            x =  150 + 40 * Math.sin(a)
+            y = 100 + 100 * Math.cos(a)
 
             //desenha elementos
             ctx.fillStyle = 'white'
