@@ -29,6 +29,9 @@
             ctx.fillStyle = 'black'
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+            //atualiza estado
+            x = x + 10 * dt
+
             //desenha elementos
             ctx.fillStyle = 'white'
             ctx.fillRect(x, 150, 20, 20)
