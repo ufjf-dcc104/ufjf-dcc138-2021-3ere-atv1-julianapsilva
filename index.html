@@ -24,7 +24,11 @@
             ax: 0,
             y: 100,
             vy: 0,
-            ay: 0
+            ay: 0,
+            desenhar: function () {
+                ctx.fillStyle = 'white'
+                ctx.fillRect(this.x, this.y, 20, 20)
+            }
         }
 
         let e = {
@@ -33,7 +37,11 @@
             ax: 0,
             y: 200,
             vy: 0,
-            ay: 0
+            ay: 0,
+            desenhar: function () {
+                ctx.fillStyle = 'red'
+                ctx.fillRect(this.x, this.y, 20, 20)
+            }
         }
 
 
@@ -67,11 +75,11 @@
 
 
             //desenha elementos
-            ctx.fillStyle = 'white'
-            ctx.fillRect(p.x, p.y, 20, 20)
+            p.desenhar()
+            e.desenhar()
 
-            ctx.fillStyle = 'red'
-            ctx.fillRect(e.x, e.y, 20, 20)
+
+
 
             requestAnimationFrame(desenha)
             t0 = t
@@ -102,19 +110,15 @@
             //adiciona controle de velocidades
             switch (e.key) {
                 case 'ArrowUp':
-                    p.vy = 0
                     p.ay = 0
                     break;
                 case 'ArrowDown':
-                    p.vy = 0
                     p.ay = 0
                     break;
                 case 'ArrowLeft':
-                    p.vx = 0
                     p.ax = 0
                     break;
                 case 'ArrowRight':
-                    p.vx = 0
                     p.ax = 0
                     break;
             }
