@@ -27,7 +27,7 @@
             ay: 0,
             cor: 'white',
             desenhar: desenharElemento,
-            mover: moverElemento
+            mover: moverElemento,
         }
 
         let e = {
@@ -39,7 +39,8 @@
             ay: 0,
             cor: 'red',
             desenhar: desenharElemento,
-            mover: moverElemento
+            mover: moverElemento,
+            controlar: perseguirAlvo
         }
 
 
@@ -56,38 +57,41 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
             //Controladores
-            e.ax = 0.5 * (p.x - e.x) - 0.2 * e.vx
-            e.ay = 0.5 * (p.y - e.y) - 0.2 * e.vy
+            e.controlar(p)
 
             //atualiza dinâmica dos estados
             p.mover()
             e.mover()
 
-
-
-
             //desenha elementos
             p.desenhar()
             e.desenhar()
-
-
-
 
             requestAnimationFrame(desenha)
             t0 = t
         }
 
-        function desenharElemento () {
-                ctx.fillStyle = this.cor
-                ctx.fillRect(this.x, this.y, 20, 20)
-            }
+        function desenharElemento() {
+            ctx.fillStyle = this.cor
+            ctx.fillRect(this.x, this.y, 20, 20)
+        }
 
         function moverElemento() {
-                this.vx = this.vx + this.ax * dt
-                this.x = this.x + this.vx * dt
-                this.vy = this.vy + this.ay * dt
-                this.y = this.y + this.vy * dt
-            }
+            this.vx = this.vx + this.ax * dt
+            this.x = this.x + this.vx * dt
+            this.vy = this.vy + this.ay * dt
+            this.y = this.y + this.vy * dt
+        }
+
+        function perseguirAlvo(alvo) {
+            this.ax = 0.5 * (alvo.x - this.x) - 0.2 * this.vx
+            this.ay = 0.5 * (alvo.y - this.y) - 0.2 * this.vy
+        }
+
+        function evitarAlvo(alvo) {
+            this.ax = -0.5 * (alvo.x - this.x) - 0.2 * this.vx
+            this.ay = -0.5 * (alvo.y - this.y) - 0.2 * this.vy
+        }
 
         addEventListener('keydown', teclaPressionada)
         addEventListener('keyup', teclaSolta)
