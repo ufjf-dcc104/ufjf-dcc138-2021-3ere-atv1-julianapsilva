@@ -18,7 +18,9 @@
         canvas.width = 480
         canvas.height = 320
         let x = 150
+        let vx = 0
         let y = 100
+        let vy = 0
         let a = 0
         let t0, dt
         let ctx = canvas.getContext('2d')
@@ -31,16 +33,41 @@
             ctx.fillStyle = 'black'
             ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-            //atualiza estados
+            //atualiza dinâmica dos estados
             a = a + 2 * Math.PI * dt
-            x =  150 + 40 * Math.sin(a)
-            y = 100 + 100 * Math.cos(a)
+            x = x + vx * dt
+            y = y + vy * dt
+
+
 
             //desenha elementos
             ctx.fillStyle = 'white'
             ctx.fillRect(x, y, 20, 20)
             requestAnimationFrame(desenha)
             t0 = t
+        }
+
+        addEventListener('keydown', teclaPressionada)
+
+        function teclaPressionada(e) {
+            //adiciona controle de velocidades
+            switch (e.key) {
+                case 'ArrowUp':
+                    vy = -20
+                    break;
+                case 'ArrowDown':
+                    vy = +20
+                    break;
+                case 'ArrowLeft':
+                    vx = -20
+                    break;
+                case 'ArrowRight':
+                    vx = +20
+                    break;
+                default:
+                    break;
+            }
+
         }
 
 
